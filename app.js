@@ -8,7 +8,13 @@ const userRoutes = require('./routers/user');
 const sequelize = require('./utils/database');
 
 
-app.use(cors());
+app.use(cors(
+  {
+  // origin:'http://127.0.0.1:5500',
+  // methods: [],
+  // credentials: true       for cookies
+}
+));
 
 app.use(bodyParser.json({extended: false}));
 

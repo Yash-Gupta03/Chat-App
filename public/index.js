@@ -18,7 +18,7 @@ async function signupdata(e){
         alert('new user created');
     }
     else if(response.status == 201){
-        alert('user already exists');
+        alert('user already exists, please login');
     }
     else{
         alert('wrong information, please try again');
