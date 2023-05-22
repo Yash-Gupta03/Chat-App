@@ -22,14 +22,16 @@
       </div>
 
         <nav class="navbar fixed-bottom justify-content-center style='background-color: rgb(230,230,250);'">
-            <form class="form-inline">
+            <form class="form-inline" onsubmit="messageInfo(event)">
                 <div class="input-group mb-3 w-100">
-              <input class="form-control mr-sm-2 form-control-lg" type="search" placeholder="Message" aria-label="Search" >
+              <input class="form-control mr-sm-2 form-control-lg" id="message" type="text" placeholder="Message" >
               <button class="btn btn-outline-success my-2 my-sm-0" id="send-button" type="submit">Send</button>
             </div>
             </form>
           </nav>
 
+        <script src="chat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
     
 
