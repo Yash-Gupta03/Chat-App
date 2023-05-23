@@ -9,5 +9,12 @@ exports.addMessage = async (req, res) => {
         message:message,
         userId: req.user.id,
     });
-    res.status(200).json({newMessageDetail: data});
+    const userName = User.findOne({where:{id: req.user.id}, attributes:['name']})
+
+    res.status(200).json({newMessageDetail: data, userName});
+}
+
+exports.getMessage = async (req, res) => {
+    const data = await Message.findAll();
+    res.status(200).json({allMessageDetails: data})
 }

@@ -16,8 +16,8 @@ async function messageInfo(e) {
     const response = await axios.post(`http://localhost:3000/message/add-message`, obj, {
         headers: { Authorization: token },
       })
+      console.log(response.status);
         if (response.status == 200) {
-            console.log("check 2");
           const data = response.data.newMessageDetail;
           showMessageOnScreen(data);
         }
@@ -25,14 +25,32 @@ async function messageInfo(e) {
       }catch(err) {
         console.log(err);
         alert(err);
-        // const parentNode = document.getElementById("list");
-        // const childNode = `<div style="color:red"><h5>${err.message}</h5></div>`;
-        // parentNode.innerHTML += childNode;
       };
   }
 
+
+  function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  }
+
+  window.addEventListener("DOMContentLoaded", async () => {
+    const token = localStorage.getItem("id");  
+    try{
+    const res = await axios.get(`http://localhost:3000/message/get-message`)
+        for (let i = 0; i < res.data.allMessageDetails.length; i++) {
+          showMessageOnScreen(res.data.allMessageDetails[i]);
+        }
+    }catch(err){ console.log(err);}
+  });
+  
+
   function showMessageOnScreen(data) {
-    const parentElement = document.getElementById("list-group");
+    const parentElement = document.getElementById("message-list");
     const childElement = `<li class="list-group-item list-group-item-primary">${data.message}</li>`
     parentElement.innerHTML += childElement;
   }
