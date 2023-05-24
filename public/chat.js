@@ -28,6 +28,12 @@ async function messageInfo(e) {
       };
   }
 
+  function clearList(id){
+    const root = document.getElementById(`${id}`);
+    while( root.firstChild ){
+      root.removeChild( root.firstChild );
+    }
+  }
 
   function parseJwt (token) {
     var base64Url = token.split('.')[1];
@@ -47,6 +53,19 @@ async function messageInfo(e) {
         }
     }catch(err){ console.log(err);}
   });
+
+  async function realTime(){
+    const token = localStorage.getItem("id");  
+    clearList("message-list")
+    try{
+    const res = await axios.get(`http://localhost:3000/message/get-message`)
+        for (let i = 0; i < res.data.allMessageDetails.length; i++) {
+          showMessageOnScreen(res.data.allMessageDetails[i]);
+        }
+    }catch(err){ console.log(err);}
+  }
+
+  setInterval(realTime, 1000);
   
 
   function showMessageOnScreen(data) {

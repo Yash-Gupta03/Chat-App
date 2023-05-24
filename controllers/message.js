@@ -11,7 +11,7 @@ exports.addMessage = async (req, res) => {
     });
     const userName = User.findOne({where:{id: req.user.id}, attributes:['name']})
 
-    res.status(200).json({newMessageDetail: data, userName});
+    res.status(200).json({newMessageDetail: data, name: userName});
 }
 
 exports.getMessage = async (req, res) => {
