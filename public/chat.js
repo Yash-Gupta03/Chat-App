@@ -1,7 +1,9 @@
+// let arr = [];
+// const token = localStorage.getItem("id");
+// localStorage.setItem(token, arr);
 async function messageInfo(e) {
     e.preventDefault();
     let message = document.getElementById("message").value;
-    console.log("working");
   
     // Making values in the form null after submitting the form
     document.getElementById("message").value = null;
@@ -11,6 +13,13 @@ async function messageInfo(e) {
       message
     };
     // Post request to the server to store user details
+
+    const s = localStorage.getItem("messages");
+    arr = JSON.parse(s);
+    arr.push(message);
+    let string = JSON.stringify(arr)
+    localStorage.setItem("messages", string);
+    console.log(arr);
     const token = localStorage.getItem("id");
     try{
     const response = await axios.post(`http://localhost:3000/message/add-message`, obj, {
@@ -21,7 +30,6 @@ async function messageInfo(e) {
           const data = response.data.newMessageDetail;
           showMessageOnScreen(data);
         }
-  
       }catch(err) {
         console.log(err);
         alert(err);
@@ -45,7 +53,7 @@ async function messageInfo(e) {
   }
 
   window.addEventListener("DOMContentLoaded", async () => {
-    const token = localStorage.getItem("id");  
+    // const token = localStorage.getItem("id");  
     try{
     const res = await axios.get(`http://localhost:3000/message/get-message`)
         for (let i = 0; i < res.data.allMessageDetails.length; i++) {
@@ -54,18 +62,18 @@ async function messageInfo(e) {
     }catch(err){ console.log(err);}
   });
 
-  async function realTime(){
-    const token = localStorage.getItem("id");  
-    clearList("message-list")
-    try{
-    const res = await axios.get(`http://localhost:3000/message/get-message`)
-        for (let i = 0; i < res.data.allMessageDetails.length; i++) {
-          showMessageOnScreen(res.data.allMessageDetails[i]);
-        }
-    }catch(err){ console.log(err);}
-  }
+  // async function realTime(){
+  //   const token = localStorage.getItem("id");  
+  //   clearList("message-list")
+  //   try{
+  //   const res = await axios.get(`http://localhost:3000/message/get-message`)
+  //       for (let i = 0; i < res.data.allMessageDetails.length; i++) {
+  //         showMessageOnScreen(res.data.allMessageDetails[i]);
+  //       }
+  //   }catch(err){ console.log(err);}
+  // }
 
-  setInterval(realTime, 1000);
+  // setInterval(realTime, 1000);
   
 
   function showMessageOnScreen(data) {
