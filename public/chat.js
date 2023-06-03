@@ -36,6 +36,9 @@ async function messageInfo(e) {
       };
   }
 
+  
+  
+
   function clearList(id){
     const root = document.getElementById(`${id}`);
     while( root.firstChild ){
@@ -82,3 +85,6 @@ async function messageInfo(e) {
     parentElement.innerHTML += childElement;
   }
   
+
+  const btnMgmt = document.getElementById('grp-mgmt');
+  btnMgmt.onclick = ""

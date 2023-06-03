@@ -17,9 +17,6 @@ async function logindata(e) {
     const response = await axios.post(`http://127.0.0.1:3000/user/login`, obj)
         if (response.status == 200) {
           alert(response.data.message);
-          let arr = [];
-          let s = JSON.stringify(arr);
-          localStorage.setItem("messages", s);
           localStorage.setItem("id", response.data.token);
           window.location.href = "chat.html";
 
