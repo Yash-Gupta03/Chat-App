@@ -8,8 +8,19 @@ const Message = sequelize.define("message", {
     allowNull: false,
     primaryKey: true,
   },
+  name:{
+    type: Sequelize.STRING,
+  },
   message: {
     type: Sequelize.STRING,
+  },
+  groupId:{
+    type:Sequelize.INTEGER,
+    allowNull: false,
+    references:{
+      model:Group,
+      key: "id",
+    },
   },
 });
 

@@ -11,6 +11,8 @@ const sequelize = require('./utils/database');
 
 const User = require('./models/user');
 const Message = require('./models/message');
+const Group = require('./models/group');
+const UserGroup = require('./models/usergrouprelation');
 
 dotenv.config();
 
@@ -35,6 +37,12 @@ app.use((req, res)=>{
 
 User.hasMany(Message);
 Message.belongsTo(User);
+Message.belongsTo(Group);
+User.hasMany(UserGroup);
+Group.hasMany(Message);
+Group.hasMany(UserGroup);
+UserGroup.belongsTo(User);
+UserGroup.belongsTo(Group);
 
 sequelize.sync()
 .then()
