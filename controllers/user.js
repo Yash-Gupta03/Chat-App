@@ -11,8 +11,8 @@ function isStringInvalid(string){
     }
 }
 
-function generateToken(id) {
-    return jwt.sign({ userId: id}, process.env.TOKEN);
+function generateToken(id, name) {
+    return jwt.sign({ userId: id, name:name}, process.env.TOKEN);
   }
 
 exports.signup = async (req, res)=>{
@@ -61,7 +61,7 @@ exports.login = async (req, res)=>{
                 res.status(200).json({
                     success: true,
                     message:'logged in successfully',
-                    token: generateToken(data[0].id)
+                    token: generateToken(data[0].id, data[0].name)
                 });
             }else{
                 res.status(201).json({success: false, message:'wrong password'});

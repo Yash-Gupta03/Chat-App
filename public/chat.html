@@ -17,13 +17,13 @@
 
 
 <body>
-    <div class="background-yellow"></div>
+    <!-- <div class="background-yellow"></div> -->
 
     <div class="main-container">
 
       <div class="left-container">
 
-        <div class="chat-list">
+        <div class="chat-list", id="chat-list">
 
         </div>
         <a href="groupmgmt.html">
@@ -35,19 +35,31 @@
       <div class="right-container">
 
         <div class="header">
-            <!-- <h4>Yash<br><span>Online</span></h4> -->
+            <h4 id="groupname"></h4>
         </div>
         <div class="chat-container">
-            <div class="message-box friend-message">
-                <!-- <p>Ahh, I can't believe you do too!<br><span>07:45</span></p> -->
-              </div>
+          <table class="table">
+            <tbody id="chattable">
+            </tbody>
+        </table>
+            <!-- <div class="message-box friend-message">
+                <p>Ahh, I can't believe you do too!<br><span>07:45</span></p>
+              </div> -->
         </div>
-        <div class="chatbox-input">
-            <input type="text" placeholder="Type a message">
+        <!-- <div class="chatbox-input">
+            <input type="text" placeholder="Type a message"> -->
+            <div class="chatbox-input">
+              <input type="text" id="message" required>
+              <button class="btn" id="sendbtn">Send</button>
+          </div>
 
         </div>
       </div>
     </div>
+    <script src="chat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>
 
 
   

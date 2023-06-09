@@ -56,10 +56,23 @@
             <label class="form-label" for="email">Participants</label>
           </div>
 
-          <a href="chat.html"> <button type="submit" class="btn btn-primary m-4">Create</button></a>
+          <button type="submit" class="btn btn-primary m-4">Create</button>
         </form>
       </div>
       <ul id="list"></ul>
+      <div class="w-50 mt-2">
+        <table class="table table-bordered border-dark table-sm table-responsive  " id="table">
+          <thead class="thead-dark">
+            <tr>
+              <!-- <th scope="col">S.No.</th> -->
+              <th class="w-0" scope="col">Groups</th>
+              <th class="w-0" scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+      </div>
 
       <script src="groupmgmt.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

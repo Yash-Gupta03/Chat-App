@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../Utils/database");
+const sequelize = require("../utils/database");
 
 const Group = sequelize.define("groups", {
   id: {
@@ -12,6 +12,7 @@ const Group = sequelize.define("groups", {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
+    primaryKey: true,
   },
   admin: {
     type: Sequelize.STRING,

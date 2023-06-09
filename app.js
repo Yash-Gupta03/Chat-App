@@ -7,12 +7,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routers/user');
 const messageRoutes = require('./routers/message');
+const groupRoutes = require('./routers/group');
 const sequelize = require('./utils/database');
 
 const User = require('./models/user');
 const Message = require('./models/message');
 const Group = require('./models/group');
-const UserGroup = require('./models/usergrouprelation');
+const UserGroup = require('./models/userGroup');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(bodyParser.json({extended: false}));
 
 app.use('/user',userRoutes);
 app.use('/message', messageRoutes);
+app.use('/group', groupRoutes);
 
 app.use(express.static("public"));
 

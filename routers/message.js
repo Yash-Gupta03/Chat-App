@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.use('/add-message', authController.authenticate, messageController.addMessage);
 
-router.use('/get-message', messageController.getMessage);
+router.use('/retrieve-messages/:gname', messageController.retrieveMessages);
 
 module.exports = router;
