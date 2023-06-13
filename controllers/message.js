@@ -9,6 +9,14 @@ const io = require("socket.io")(4000, {
     },
   });
 
+
+  io.on("connection", (socket) => {
+    socket.on('retrieve-messages', async (gname) => {
+        const data = await Message.findAll({where:{groupname:gname}, attributes:['message', 'name']});
+        io.emit('allMessages', data)
+    })
+  });
+
 exports.addMessage = async (req, res) => {
     const message = req.body.message;
     const groupName = req.body.groupName;
@@ -26,9 +34,9 @@ exports.addMessage = async (req, res) => {
     res.status(200).json({newMessage: data, name: userName});
 }
 
-exports.retrieveMessages = async (req, res) => {
-    const gname = req.params.gname;
-    const data = await Message.findAll({where:{groupname:gname}, attributes:['message', 'name']});
-    // console.log(data);
-    res.status(200).json({allMessages: data})
-}
+// exports.retrieveMessages = async (req, res) => {
+//     const gname = req.params.gname;
+//     const data = await Message.findAll({where:{groupname:gname}, attributes:['message', 'name']});
+//     // console.log(data);
+//     res.status(200).json({allMessages: data})
+// }

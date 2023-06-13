@@ -1,4 +1,4 @@
-import {io} from 'socket.io-client';
+// import {io} from 'socket.io-client';
 
 const socket = io('http://localhost:4000');
 socket.on('connect', ()=>{
@@ -34,14 +34,24 @@ const chattable = document.getElementById('chattable');
   const groupname = document.getElementById('groupname');
 
   async function loadMessages(){
-    chattable.innerHTML = '';
+    // chattable.innerHTML = '';
     groupname.innerHTML=JSON.parse(localStorage.getItem('groupName'));
     const gname = JSON.parse(localStorage.getItem('groupName'));
-    const messages = await axios.get(`http://localhost:3000/message/retrieve-messages/${gname}`);
-    console.log(messages.data.allMessages[0].message);
-    for(let i = 0; i<messages.data.allMessages.length; i++){
-      showmessage(messages.data.allMessages[i].name, messages.data.allMessages[i].message);
+    socket.emit("retrieve-messages", gname);
+
+    socket.on('allMessages', (data)=>{
+      console.log(data);
+      chattable.innerHTML = '';
+      for(let i = 0; i<data.length; i++){
+      showmessage(data[i].name, data[i].message);
     }
+    })
+
+    // const messages = await axios.get(`http://localhost:3000/message/retrieve-messages/${gname}`);
+    // console.log(messages.data.allMessages[0].message);
+    // for(let i = 0; i<messages.data.allMessages.length; i++){
+    //   showmessage(messages.data.allMessages[i].name, messages.data.allMessages[i].message);
+    // }
 
 
   }
@@ -66,8 +76,9 @@ async function sendmessage(e){
      const response= await axios.post(`http://localhost:3000/message/add-message`,messagedata,{headers:{Authorization : token}});
      console.log('--------------------------',response.data.name,response.data.newMessage.message);
      console.log("running");
-     showmessage(response.data.name.name,response.data.newMessage.message)
+    //  showmessage(response.data.name.name,response.data.newMessage.message)
      message.value='';
+     loadMessages();
       }catch(err){
         console.log(err);
       }
